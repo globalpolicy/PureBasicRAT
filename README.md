@@ -1,6 +1,6 @@
 # PureBasicRAT
 <p>
-A Remote Administration Tool for windows, built using PureBasic.<br>Uses the Telegram Bot API as communication channel to the server
+A Remote Administration Tool for windows, built using PureBasic.<br>Uses the Telegram Bot API as the communication channel to the server
 </p>
 <p>
 Currently, it supports the following commands:
