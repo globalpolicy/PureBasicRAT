@@ -11,6 +11,10 @@ Retrieves basic information about the host machine.
 <p>
 Retrieves the screenshot of the host machine.
 </p>
+<h4><li>/getkeylog</li></h4>
+<p>
+Retrieves the keystrokes recorded on the host machine.
+</p>
 <h4><li>/msgbox</li></h4>
 <p>
 Displays a messagebox on the host machine. Must be in the form:
