@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<project xmlns="http://www.purebasic.com/namespace" version="1.0" creator="PureBasic 5.70 LTS (Windows - x86)">
+  <section name="config">
+    <options closefiles="1" openmode="1" name="PurebasicRAT Stub"/>
+  </section>
+  <section name="data">
+    <explorer view="" pattern="0"/>
+    <log show="1"/>
+    <lastopen date="2020-05-11 10:59" user="s0ft" host="DESKTOP-I55N2TE"/>
+  </section>
+  <section name="files">
+    <file name="commandexecutor.pbi">
+      <config load="1" scan="1" panel="1" warn="1" lastopen="1" panelstate="+"/>
+      <fingerprint md5="bd272bea81b2f0399b5146b4cfb15b9f"/>
+    </file>
+    <file name="commandretriever.pbi">
+      <config load="1" scan="1" panel="1" warn="1" lastopen="1" panelstate="+"/>
+      <fingerprint md5="27cf63500ffd28fa4ba8913736561c66"/>
+    </file>
+    <file name="configreader.pbi">
+      <config load="1" scan="1" panel="1" warn="1" lastopen="1" panelstate="+"/>
+      <fingerprint md5="d441cb638d0e910ba0ef525f8329ba5e"/>
+    </file>
+    <file name="constants.pbi">
+      <config load="1" scan="1" panel="1" warn="1" lastopen="1" panelstate="+"/>
+      <fingerprint md5="f08c20c4d8c0ea6ea0bbd79ac5628eb4"/>
+    </file>
+    <file name="customtypes.pbi">
+      <config load="1" scan="1" panel="1" warn="1" lastopen="1" panelstate="+"/>
+      <fingerprint md5="677ff65428e2aa2d4f5240e9fd8845e2"/>
+    </file>
+    <file name="datetime.pbi">
+      <config load="1" scan="1" panel="1" warn="1" lastopen="1" panelstate="+"/>
+      <fingerprint md5="60bd478ea41f1551b17c3c29727b01d2"/>
+    </file>
+    <file name="hasher.pbi">
+      <config load="1" scan="1" panel="1" warn="1" lastopen="1" panelstate="+"/>
+      <fingerprint md5="78e55e2d0c8539a97dff5f532ec316df"/>
+    </file>
+    <file name="instancechecker.pbi">
+      <config load="1" scan="1" panel="1" warn="1" lastopen="1" panelstate="+"/>
+      <fingerprint md5="1cd6cee958ea2d8b31c17ed69ad9cc57"/>
+    </file>
+    <file name="keylogger.pbi">
+      <config load="1" scan="1" panel="1" warn="1" lastopen="1" panelstate="+"/>
+      <fingerprint md5="9c2a7bd71e1eb23d5fc7c9496d5bee83"/>
+    </file>
+    <file name="launcher.pbi">
+      <config load="1" scan="1" panel="1" warn="1" lastopen="1" panelstate="+"/>
+      <fingerprint md5="68be0e5194a366c34f63659a2c7a0f55"/>
+    </file>
+    <file name="logger.pbi">
+      <config load="1" scan="1" panel="1" warn="1" lastopen="1" panelstate="+"/>
+      <fingerprint md5="714f2510c75c529b28d1c08debf95753"/>
+    </file>
+    <file name="machineinfogatherer.pbi">
+      <config load="1" scan="1" panel="1" warn="1" lastopen="1" panelstate="+"/>
+      <fingerprint md5="914c42ccf7a55f1d2509c922f7bf3ac8"/>
+    </file>
+    <file name="main.pb">
+      <config load="1" scan="1" panel="1" warn="1" lastopen="1" panelstate="+"/>
+      <fingerprint md5="6d399476a4c1b403daaa4bc1f4af213c"/>
+    </file>
+    <file name="messagesender.pbi">
+      <config load="1" scan="1" panel="1" warn="1" lastopen="1" panelstate="+"/>
+      <fingerprint md5="ae373a91e3ea878f70e2144ae24088bc"/>
+    </file>
+    <file name="persistence.pbi">
+      <config load="1" scan="1" panel="1" warn="1" lastopen="1" panelstate="+"/>
+      <fingerprint md5="f750ebd4db27a04dc005264ebe6e079b"/>
+    </file>
+    <file name="randomgen.pbi">
+      <config load="1" scan="1" panel="1" warn="1" lastopen="1" panelstate="+"/>
+      <fingerprint md5="7930a631618150617bab4af9a5052310"/>
+    </file>
+    <file name="resourcereader.pbi">
+      <config load="1" scan="1" panel="1" warn="1" lastopen="1" panelstate="+"/>
+      <fingerprint md5="98f871ae46185da8b5b87ebe899dbd8a"/>
+    </file>
+    <file name="screenshotter.pbi">
+      <config load="1" scan="1" panel="1" warn="1" lastopen="1" panelstate="+"/>
+      <fingerprint md5="cc943a16823cfb87e515f389b14a2c49"/>
+    </file>
+    <file name="xor.pbi">
+      <config load="1" scan="1" panel="1" warn="1" lastopen="1" panelstate="+"/>
+      <fingerprint md5="a877c439fe251b299a85d7587260ad9f"/>
+    </file>
+  </section>
+  <section name="targets">
+    <target name="Debug" enabled="0" default="1">
+      <inputfile value="main.pb"/>
+      <outputfile value="stub.exe"/>
+      <executable value="stub.exe"/>
+      <options asm="1" thread="1" xpskin="1" debug="1"/>
+      <purifier enable="1"/>
+      <temporaryexe value="source"/>
+      <debugger custom="1" type="ide"/>
+      <versioninfo enable="1">
+        <field0 value="1.0.0.0"/>
+        <field1 value="1.0.0.0"/>
+        <field2 value="Shiltimur Inc"/>
+        <field3 value="Shiltimur Monitor"/>
+        <field4 value="1.0.0.0"/>
+        <field5 value="1.0.0.0"/>
+        <field6 value="Shiltimur Monitor Service"/>
+        <field7 value="Shiltimur"/>
+        <field8 value="Shiltimur"/>
+      </versioninfo>
+    </target>
+    <target name="Release" enabled="1" default="0">
+      <inputfile value="main.pb"/>
+      <outputfile value="stub.exe"/>
+      <executable value="stub.exe"/>
+      <options asm="1" thread="1" xpskin="1"/>
+      <temporaryexe value="source"/>
+      <versioninfo enable="1">
+        <field0 value="1.0.0.0"/>
+        <field1 value="1.0.0.0"/>
+        <field2 value="Shiltimur Inc."/>
+        <field3 value="Shiltimur Monitor"/>
+        <field4 value="1.0.0.0"/>
+        <field5 value="1.0.0.0"/>
+        <field6 value="Shiltimur Server"/>
+        <field7 value="Shiltimur"/>
+        <field8 value="Shiltimur"/>
+      </versioninfo>
+    </target>
+  </section>
+</project>

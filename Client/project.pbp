@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<project xmlns="http://www.purebasic.com/namespace" version="1.0" creator="PureBasic 5.70 LTS (Windows - x86)">
+  <section name="config">
+    <options closefiles="1" openmode="1" name="PurebasicRAT Client"/>
+    <comment>GUI for creating PurebasicRAT server executables</comment>
+  </section>
+  <section name="data">
+    <explorer view="" pattern="0"/>
+    <log show="1"/>
+    <lastopen date="2020-05-11 11:00" user="s0ft" host="DESKTOP-I55N2TE"/>
+  </section>
+  <section name="files">
+    <file name="form.pbf">
+      <config load="1" scan="1" panel="1" warn="1" lastopen="1" panelstate="+"/>
+      <fingerprint md5="ceb05400630c6f0a1bb7aab2c35f8cad"/>
+    </file>
+    <file name="formcontroller.pb">
+      <config load="1" scan="1" panel="1" warn="1" lastopen="1" panelstate="+"/>
+      <fingerprint md5="b8a5b43378edf8bb46dc5a6b2fa8f682"/>
+    </file>
+    <file name="resourcewriter.pbi">
+      <config load="1" scan="1" panel="1" warn="1" lastopen="1" panelstate="+"/>
+      <fingerprint md5="e8c21f444ee6d48d390a5a94a0c8b6e9"/>
+    </file>
+    <file name="xor.pbi">
+      <config load="1" scan="1" panel="1" warn="1" lastopen="1" panelstate="+"/>
+      <fingerprint md5="b4108f816b5f562e589e14bb91c76151"/>
+    </file>
+  </section>
+  <section name="targets">
+    <target name="Release" enabled="1" default="0">
+      <inputfile value="formcontroller.pb"/>
+      <outputfile value="client.exe"/>
+      <executable value="client.exe"/>
+      <options asm="1" xpskin="1"/>
+      <temporaryexe value="source"/>
+      <icon enable="1">food.ico</icon>
+      <versioninfo enable="1">
+        <field0 value="1.0.0.0"/>
+        <field1 value="1.0.0.0"/>
+        <field2 value="Shiltimur Inc."/>
+        <field3 value="ShitimurRAT Client"/>
+        <field4 value="1.0.0.0"/>
+        <field5 value="1.0.0.0"/>
+        <field6 value="ShiltimurRAT Client"/>
+        <field7 value="Shiltimur Client"/>
+        <field8 value="Shiltimur Client"/>
+      </versioninfo>
+    </target>
+    <target name="Debug" enabled="1" default="1">
+      <inputfile value="formcontroller.pb"/>
+      <outputfile value="client.exe"/>
+      <executable value="client.exe"/>
+      <options asm="1" xpskin="1" debug="1"/>
+      <purifier enable="1"/>
+      <temporaryexe value="source"/>
+      <icon enable="1">food.ico</icon>
+      <debugger custom="1" type="ide"/>
+    </target>
+  </section>
+</project>
