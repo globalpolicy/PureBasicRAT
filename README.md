@@ -32,13 +32,12 @@ No points for guessing.
 </ol>
 
 <p>
-<h5>Note</h5>
-<p>
+
+<h4>Note:</h4>
+>Prepend a machine ID for targetted command. E.g:
 
 ```
-Prepend a machine ID for targetted command. E.g.
 <ID>/command
 ```
 
-</p>
 </p>
