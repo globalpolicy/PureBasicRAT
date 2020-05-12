@@ -1,6 +1,6 @@
 # PureBasicRAT
 <p>
-<h4>A Remote Administration Tool for windows, built using PureBasic</h4><br>
+<h4>A Remote Administration Tool for windows, built using PureBasic</h4>
 Uses the Telegram Bot API as the communication channel to the server<br>
 Create a bot of your own by consulting @BotFather and use the bot token in the builder.<br> 
 You also need to provide your user id which you can get by consulting @useridbot or the like.
