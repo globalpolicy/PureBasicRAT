@@ -1,14 +1,13 @@
 ﻿;gets commands using Telegram Bot API
 XIncludeFile "configreader.pbi"
 XIncludeFile "customtypes.pbi"
+XIncludeFile "logger.pbi"
 
 EnableExplicit
 
 
-Procedure RetrieveCommandArray(Array msgArray.TelegramMessage(1)) ;syntax while passing an array, must specify the array dimension i.e. 1 here
-                                                                  ;fills the msgArray parameter for the output
-                                                                  ;msgArray will be returned as a 1-indexed array
-  Dim msgArray.TelegramMessage(0) ;reset the input array so that an empty array is returned if failed to retrieve new commands
+Procedure ThreadProc(*messages.TelegramCommandArrayHolder)
+  Dim *messages\commandArray(0) ;reset the input array so that an empty array is returned if failed to retrieve new commands
   
   Define reqURL.s,request.l,*received,responseBody.s
   Define json.l,jsonObject,okStatus.i,resultArray,i.i,result,updateId.q,message,messageId.q,from,fromId.q,firstName.s,isBot.l,date.q,text.s  
@@ -44,21 +43,35 @@ Procedure RetrieveCommandArray(Array msgArray.TelegramMessage(1)) ;syntax while 
               text=GetJSONString(GetJSONMember(message,"text"))
               ;Debug updateId
               
-              ReDim msgArray(i+1) ;this array's index starts from 1. i.e. msgArray is assumed 1-indexed. this allows checking for array emptiness
-              msgArray(i+1)\UpdateId=updateId
-              msgArray(i+1)\Date=date
-              msgArray(i+1)\FromId=fromId
-              msgArray(i+1)\FirstName=firstName
-              msgArray(i+1)\IsBot=isBot
-              msgArray(i+1)\MessageId=messageId
-              msgArray(i+1)\Text=text
+              ReDim *messages\commandArray(i+1) ;this array's index starts from 1. i.e. *messages\commandArray is assumed 1-indexed. this allows checking for array emptiness
+              *messages\commandArray(i+1)\UpdateId=updateId
+              *messages\commandArray(i+1)\Date=date
+              *messages\commandArray(i+1)\FromId=fromId
+              *messages\commandArray(i+1)\FirstName=firstName
+              *messages\commandArray(i+1)\IsBot=isBot
+              *messages\commandArray(i+1)\MessageId=messageId
+              *messages\commandArray(i+1)\Text=text
             EndIf
           Next
         EndIf
       EndIf
     EndIf
-  EndIf
+  EndIf  
+EndProcedure
 
+
+Procedure RetrieveCommandArray(*commandsHolder.TelegramCommandArrayHolder, timeoutMs.i) ;syntax while passing an array, must specify the array dimension i.e. 1 here
+                                                                  ;fills the commandsHolder\commandArray parameter for the output
+                                                                  ;commandsHolder\commandArray will be returned as a 1-indexed array
+                                                                  ;waits for a max of timeoutMs before returning. HTTPRequest can hang sometimes, that's why.
+  Define thread.i
+  thread=CreateThread(@ThreadProc(),*commandsHolder)
+  WaitThread(thread,timeoutMs)
+  If IsThread(thread) ;thread is stuck, most likely at the HTTPRequest function
+    LogMsg("Command retriever thread stuck!")
+    KillThread(thread)
+  EndIf
+  
 EndProcedure
 
 ;references. i've come to realise this is a good practice for my puzzled self-reflecting future self
@@ -66,9 +79,9 @@ EndProcedure
 
 
 
-; IDE Options = PureBasic 5.70 LTS (Windows - x64)
-; CursorPosition = 21
-; FirstLine = 9
+; IDE Options = PureBasic 5.70 LTS (Windows - x86)
+; CursorPosition = 69
+; FirstLine = 52
 ; Folding = -
 ; EnableAsm
 ; EnableThread

@@ -7,7 +7,7 @@
 	},
 	{
 	"command":"msgbox",
-	"description":"msgbox <Title>;;<Message>"
+	"description":"/msgbox <Title>;;<Message>"
 	},
 	{
 	"command":"screenshot",
@@ -24,6 +24,22 @@
 	{
 	"command":"unblockinput",
 	"description":"resumes user input from mouse and keyboard"
+	},
+	{
+	"command":"keypress",
+	"description":"emulate keystrokes: /keypress stringToType"
+	},
+	{
+	"command":"lclick",
+	"description":"emulate left click: /lclick <repetitions> <interval in ms>"
+	},
+	{
+	"command":"rclick",
+	"description":"emulate right click: /rclick <repetitions> <interval in ms>"
+	},
+	{
+	"command":"mclick",
+	"description":"emulate middle click: /mclick <repetitions> <interval in ms>"
 	}
 	]
 }

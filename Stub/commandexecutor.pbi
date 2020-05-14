@@ -1,9 +1,11 @@
 ﻿;include file for command execution
-XIncludeFile "customtypes.pbi"
+ XIncludeFile "customtypes.pbi"
 XIncludeFile "configreader.pbi"
 XIncludeFile "machineinfogatherer.pbi"
 XIncludeFile "messagesender.pbi"
 XIncludeFile "screenshotter.pbi"
+XIncludeFile "keypresser.pbi"
+XIncludeFile "mouseclicker.pbi"
 
 EnableExplicit
 
@@ -82,6 +84,28 @@ Procedure CarryOut(command.s,fromId.q,messageId.q=0) ;actual command execution i
     ;unblock user inputs
     doBlockInput(#False)
   EndIf
+  If Left(command,9)="/keypress"
+    ;type the following string
+    tmp=LTrim(Mid(command,10))
+    TypeThis(tmp)
+  EndIf
+  If Left(command,7)="/lclick"
+    ;left click
+    tmp=Trim(Mid(command,8))
+    ClickThis(Val(StringField(tmp,1," ")),Val(StringField(tmp,2," ")),"left")
+  EndIf
+  If Left(command,7)="/rclick"
+    ;right click
+    tmp=Trim(Mid(command,8))
+    ClickThis(Val(StringField(tmp,1," ")),Val(StringField(tmp,2," ")),"right")
+  EndIf
+  If Left(command,7)="/mclick"
+    ;middle click
+    tmp=Trim(Mid(command,8))
+    ClickThis(Val(StringField(tmp,1," ")),Val(StringField(tmp,2," ")),"middle")
+  EndIf
+  
+  
   
   
 
@@ -123,8 +147,7 @@ EndProcedure
 ;https://www.purebasic.fr/english/viewtopic.php?f=13&t=55696-->difference between structure pointer and actual structure
 ;https://www.purebasic.fr/english/viewtopic.php?f=13&t=64167-->Local variables of a procedure go out of scope when passed to CreateThread() and accessed from the thread procedure
 ; IDE Options = PureBasic 5.70 LTS (Windows - x86)
-; CursorPosition = 104
-; FirstLine = 83
+; CursorPosition = 7
 ; Folding = -
 ; EnableAsm
 ; EnableThread

@@ -16,7 +16,17 @@ Structure MessageboxParams
   text.s
 EndStructure
 
-; IDE Options = PureBasic 5.70 LTS (Windows - x64)
+Structure TelegramCommandArrayHolder ;this structure is just for passing to thread procedure since passing an array directly doesn't seem to work
+  Array commandArray.TelegramMessage(0)  
+EndStructure
+
+Structure MouseClickInfo
+  numTimes.i
+  interval.i
+  mouseButton.s
+EndStructure
+
+; IDE Options = PureBasic 5.70 LTS (Windows - x86)
 ; CursorPosition = 15
 ; EnableAsm
 ; EnableThread

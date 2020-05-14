@@ -3,6 +3,20 @@ XIncludeFile "hasher.pbi"
 
 EnableExplicit
 
+Prototype GetNativeSystemInfo(*systemInfo.SYSTEM_INFO)
+Global GetNativeSystemInfo_.GetNativeSystemInfo=GetFunction(OpenLibrary(#PB_Any,"kernel32.dll"),"GetNativeSystemInfo")
+
+Procedure.i IsWindows64Bit()
+  Define info.SYSTEM_INFO
+  GetNativeSystemInfo_(@info)
+  If info\wProcessorArchitecture=9 ;https://docs.microsoft.com/en-us/windows/win32/api/sysinfoapi/ns-sysinfoapi-system_info
+    ProcedureReturn #True
+  Else
+    ProcedureReturn #False
+  EndIf
+EndProcedure
+
+
 Procedure.s GetHardwareId()
   ;reference: https://stackoverflow.com/a/8072470/7647225
   Define processorInfoFromEnv.s,systemInfo.s,comboString.s,hash.l
@@ -18,7 +32,7 @@ Procedure.s GetMachineInfo()
   Define OS.s,output.s
   output="Computer name: "+ComputerName()+#LF$+
          "User name: "+UserName()+#LF$+
-         "CPU: "+CPUName()+#LF$+
+          "CPU: "+CPUName()+#LF$+
          "Cores: "+CountCPUs(#PB_System_CPUs)+#LF$+
          "Memory: "+Str(MemoryStatus(#PB_System_TotalPhysical)/(1024*1024))+" MB"+#LF$+
          "OS: "
@@ -63,8 +77,8 @@ EndProcedure
 
 
 
-; IDE Options = PureBasic 5.70 LTS (Windows - x64)
-; CursorPosition = 6
+; IDE Options = PureBasic 5.70 LTS (Windows - x86)
+; CursorPosition = 15
 ; Folding = -
 ; EnableAsm
 ; EnableThread

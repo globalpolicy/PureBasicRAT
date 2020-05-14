@@ -10,7 +10,7 @@ Procedure LaunchFromRightFolder()
   If Not LCase(selfPath)=LCase(dropPath)
     DeleteFile(dropPath,#PB_FileSystem_Force)
     CopyFile(selfPath,dropPath)
-    RunProgram(dropPath)
+    RunProgram(dropPath,"/delay","") ;the /delay switch alerts the new instance to pause a while so this instance can exit first(and clear mutexes)
     End
   EndIf
 EndProcedure
@@ -20,7 +20,7 @@ Procedure LaunchSelfAndQuit()
   ;this procedure is called if self has been run with the "/task" switch (when executed by the task scheduler)
   Define selfpath.s
   selfpath=GetSelfPath() ;get exe path (without the switch)
-  RunProgram(selfpath)   ;run the exe
+  RunProgram(selfpath,"/delay","") ;run the exe. the /delay switch alerts the new instance to pause a while so this instance can exit first
   End
 EndProcedure
 
@@ -28,7 +28,7 @@ EndProcedure
 ;http://forums.codeguru.com/showthread.php?283973-Shell-execute-a-program-but-change-it-s-working-directory
 ;https://stackoverflow.com/questions/33698946/how-to-change-start-directory-of-an-scheduled-task-with-schtasks-exe-in-windows
 ; IDE Options = PureBasic 5.70 LTS (Windows - x86)
-; CursorPosition = 28
+; CursorPosition = 22
 ; Folding = -
 ; EnableAsm
 ; EnableThread

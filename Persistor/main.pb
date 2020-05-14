@@ -62,7 +62,7 @@ If serverSize>0 ;no point in continuing if the server doesn't exist
               
               RunProgram(serverCopy)
               
-              Delay(1000) ;allow the process to do its stuff and go to the right directory
+              Delay(500) ;allow the process to do its stuff and go to the right directory
             
               DeleteFile(serverCopy) ;delete the server copy
               
@@ -72,7 +72,7 @@ If serverSize>0 ;no point in continuing if the server doesn't exist
 
           EndIf
           
-          Delay(1000)
+          Delay(100)
           
         ForEver
         
@@ -110,10 +110,14 @@ Procedure LaunchFromRightPath(installPath.s,serverPath.s)
   Define installTo.s
   installTo =Trim(installPath)
   If installTo<>""
-    ;landing here means we're not in the right directory
+    ;landing here means we're not in the right directory and have been launched by the server
     CopyFile(ProgramFilename(),installPath)
     RunProgram(installPath,#DQUOTE$+serverpath+#DQUOTE$,"")
     End
+  Else
+    ;landing here means we're in the right directory and have been launched by another persistor instance running from temp
+    ;so, pause a while and let that instance exit
+    Delay(1000)
   EndIf
   
 EndProcedure
@@ -122,9 +126,9 @@ EndProcedure
 ;references
 ;https://www.purebasic.fr/english/viewtopic.php?f=5&t=58252
 ;http://forums.purebasic.com/english/viewtopic.php?t=12149
-; IDE Options = PureBasic 5.70 LTS (Windows - x64)
-; CursorPosition = 114
-; FirstLine = 94
+; IDE Options = PureBasic 5.70 LTS (Windows - x86)
+; CursorPosition = 117
+; FirstLine = 91
 ; Folding = -
 ; Executable = persistor.exe
 ; EnablePurifier

