@@ -38,6 +38,42 @@ Blocks keyboard and mouse inputs for a maximum of 60 seconds on the host machine
 <p>
 No points for guessing.
 </p>
+<h4><li>/keypress</li></h4>
+<p>
+Simulate a series of keystrokes. Must be in the form:
+  
+```
+/keypress Something to type here
+```
+  
+</p>
+<h4><li>/lclick</li></h4>
+<p>
+Simulate left mouse button click. Must be in the form:
+  
+```
+/lclick <repetitions> <interval between subsequent clicks in milliseconds>
+```
+  
+</p>
+<h4><li>/rclick</li></h4>
+<p>
+Simulate right mouse button click. Must be in the form:
+  
+```
+/rclick <repetitions> <interval between subsequent clicks in milliseconds>
+```
+  
+</p>
+<h4><li>/mclick</li></h4>
+<p>
+Simulate middle mouse button click. Must be in the form:
+  
+```
+/mclick <repetitions> <interval between subsequent clicks in milliseconds>
+```
+  
+</p>
 </ol>
 
 <p>
